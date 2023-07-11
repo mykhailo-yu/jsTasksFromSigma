@@ -279,10 +279,27 @@ function createPassword() {
 
 // Задача 16
 
-// function rearrangeElementsInArray(arr) {
-
-//     return ;
-// }
+function rearrangeElementsInArray(arr) {
+    let resultArr = [];
+    let i = 0;
+    let j = arr.length - 1;
+    while(arr.length != 0) {
+        if (i == j) {
+            resultArr[i] = arr[0];
+            arr.splice(arr.indexOf(resultArr[i]), 1);
+        } else {
+            minElement = Math.min(...arr);
+            resultArr[i] = minElement;
+            arr.splice(arr.indexOf(resultArr[i]),1);
+            minElement = Math.min(...arr);
+            resultArr[j] = minElement;
+            arr.splice(arr.indexOf(resultArr[j]), 1);
+            i++;
+            j--;
+        }
+    }
+    return resultArr;
+}
 // const arr = [1, 2, 3, 4, 5];
 // console.log(rearrangeElementsInArray(arr));
 
@@ -325,9 +342,9 @@ function longestSubstr(str1, str2) {
     }
     return str1.substring(maxIndex + 1 - maxValue, maxIndex + 1)
 }
-let str1 = 'abcdeasdadabcdsf';
-let str2 = 'defghiabcdsj';
-console.log(longestSubstr(str1, str2));
+// let str1 = 'abcdeasdadabcdsf';
+// let str2 = 'defghiabcdsj';
+// console.log(longestSubstr(str1, str2));
 
 // Задача 19
 
@@ -399,9 +416,37 @@ function isAnagram(str1, str2) {
 
 // Задача 21
 
-let university = {
-    
+class University {
+    constructor() {
+        this.students = [];
+    }
+    addstudent(student) {
+        this.students.push(student);
+    }
+    deleteStudent(studentId) {
+        this.students = this.students.filter((student) => student.id !== studentId);
+    }
+    studentInfo(studentId) {
+        return this.students.find((student) => student.id === studentId);
+    }
+    studentsByCourse(course) {
+        return this.students.filter((student) => student.course === course);
+    }
+    studentsByFaculty(faculty) {
+        return this.students.filter((student) => student.faculty === faculty);
+    }
 }
+const university = new University();
+university.addstudent({id:1, name:'Tom', course: 1, faculty:'Math'});
+university.addstudent({id:2, name:'Mykhailo', course: 1, faculty:'Math'});
+university.addstudent({id:3, name:'Kamila', course: 2, faculty:'Economic'});
+university.addstudent({id:4, name:'Sofia', course: 3, faculty:'ForeignLanguages'});
+// console.log(university.students);
+// university.deleteStudent(3);
+// console.log(university.students);
+// console.log(university.studentInfo(4));
+// console.log(university.studentsByCourse(1));
+// console.log(university.studentsByFaculty('Math'));
 
 // Задача 22
 
